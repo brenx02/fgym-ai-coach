@@ -3,6 +3,9 @@ import { Dumbbell, Flame, Trophy, TrendingUp, Calendar, Zap } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Progress } from "@/components/ui/progress";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
 
 const todayWorkout = {
   name: "Treino A — Peito e Tríceps",
