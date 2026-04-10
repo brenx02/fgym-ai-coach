@@ -3,6 +3,9 @@ import { Dumbbell, Flame, Trophy, TrendingUp, Calendar, Zap } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { Progress } from "@/components/ui/progress";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
 
 const todayWorkout = {
   name: "Treino A — Peito e Tríceps",
@@ -24,13 +27,33 @@ const stats = [
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const [name, setName] = useState("Atleta");
+  const [onboardingDone, setOnboardingDone] = useState(true);
+
+  useEffect(() => {
+    if (!user) return;
+    const load = async () => {
+      const [{ data: p }, { data: up }] = await Promise.all([
+        supabase.from("profiles").select("name").eq("user_id", user.id).single(),
+        supabase.from("user_profiles").select("onboarding_completed").eq("user_id", user.id).single(),
+      ]);
+      if (p?.name) setName(p.name);
+      if (up && !up.onboarding_completed) setOnboardingDone(false);
+    };
+    load();
+  }, [user]);
+
+  useEffect(() => {
+    if (!onboardingDone) navigate("/onboarding");
+  }, [onboardingDone, navigate]);
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="container mx-auto px-6 pt-24 pb-12">
         <div className="mb-8 animate-slide-up">
-          <h1 className="font-display text-3xl font-bold text-foreground mb-1">Olá, Atleta 💪</h1>
+          <h1 className="font-display text-3xl font-bold text-foreground mb-1">Olá, {name} 💪</h1>
           <p className="text-muted-foreground">Vamos treinar hoje?</p>
         </div>
 
