@@ -38,6 +38,120 @@ export type Database = {
         }
         Relationships: []
       }
+      post_comments: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          post_id: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          post_id: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          post_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_comments_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      post_likes: {
+        Row: {
+          created_at: string
+          id: string
+          post_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          post_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          post_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_likes_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      posts: {
+        Row: {
+          comments_count: number
+          created_at: string
+          description: string
+          id: string
+          image_url: string | null
+          likes_count: number
+          localizacao: string | null
+          nivel: string | null
+          post_type: string
+          sport_slug: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          comments_count?: number
+          created_at?: string
+          description: string
+          id?: string
+          image_url?: string | null
+          likes_count?: number
+          localizacao?: string | null
+          nivel?: string | null
+          post_type?: string
+          sport_slug: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          comments_count?: number
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string | null
+          likes_count?: number
+          localizacao?: string | null
+          nivel?: string | null
+          post_type?: string
+          sport_slug?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_sport_slug_fkey"
+            columns: ["sport_slug"]
+            isOneToOne: false
+            referencedRelation: "sports"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -62,8 +176,43 @@ export type Database = {
         }
         Relationships: []
       }
+      sports: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string | null
+          display_order: number
+          icon: string | null
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          icon?: string | null
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          icon?: string | null
+          id?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
       user_profiles: {
         Row: {
+          avatar_url: string | null
+          bio: string | null
           created_at: string
           descricao_problema: string | null
           dias_semana: number | null
@@ -75,7 +224,10 @@ export type Database = {
           laudo_url: string | null
           limitacoes: string | null
           local_treino: string | null
+          modalidade_principal: string | null
+          modalidades: string[] | null
           nivel: string | null
+          objetivo: string | null
           onboarding_completed: boolean | null
           possui_laudo: boolean | null
           problema_saude: boolean | null
@@ -85,6 +237,8 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          avatar_url?: string | null
+          bio?: string | null
           created_at?: string
           descricao_problema?: string | null
           dias_semana?: number | null
@@ -96,7 +250,10 @@ export type Database = {
           laudo_url?: string | null
           limitacoes?: string | null
           local_treino?: string | null
+          modalidade_principal?: string | null
+          modalidades?: string[] | null
           nivel?: string | null
+          objetivo?: string | null
           onboarding_completed?: boolean | null
           possui_laudo?: boolean | null
           problema_saude?: boolean | null
@@ -106,6 +263,8 @@ export type Database = {
           user_id: string
         }
         Update: {
+          avatar_url?: string | null
+          bio?: string | null
           created_at?: string
           descricao_problema?: string | null
           dias_semana?: number | null
@@ -117,7 +276,10 @@ export type Database = {
           laudo_url?: string | null
           limitacoes?: string | null
           local_treino?: string | null
+          modalidade_principal?: string | null
+          modalidades?: string[] | null
           nivel?: string | null
+          objetivo?: string | null
           onboarding_completed?: boolean | null
           possui_laudo?: boolean | null
           problema_saude?: boolean | null

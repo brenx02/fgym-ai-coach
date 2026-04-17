@@ -8,7 +8,9 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
 import Onboarding from "./pages/Onboarding";
-import Dashboard from "./pages/Dashboard";
+import Feed from "./pages/Feed";
+import Explore from "./pages/Explore";
+import NewPost from "./pages/NewPost";
 import Workout from "./pages/Workout";
 import AICoach from "./pages/AICoach";
 import Groups from "./pages/Groups";
@@ -28,7 +30,10 @@ const App = () => (
             <Route path="/" element={<Landing />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/feed" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
+            <Route path="/explore" element={<ProtectedRoute><Explore /></ProtectedRoute>} />
+            <Route path="/post/new" element={<ProtectedRoute><NewPost /></ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute><Feed /></ProtectedRoute>} />
             <Route path="/workout" element={<ProtectedRoute><Workout /></ProtectedRoute>} />
             <Route path="/ai-coach" element={<ProtectedRoute><AICoach /></ProtectedRoute>} />
             <Route path="/groups" element={<ProtectedRoute><Groups /></ProtectedRoute>} />
