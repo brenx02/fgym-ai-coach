@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to={user ? "/feed" : "/"} className="flex items-center gap-2">
+        <Link to="/feed" className="flex items-center gap-2">
           <img src={logo} alt="Fgym" className="w-8 h-8" />
           <span className="font-display font-bold text-xl text-foreground">
             F<span className="text-primary">gym</span>
